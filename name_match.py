@@ -1,12 +1,10 @@
 import pandas as pd
 
-data = pd.read_csv('email_addresses.csv')
-
 def match_names(df):
     shuffled = df.sample(frac=1).reset_index(drop=True)
 
     shuffled['buy_for_index'] = shuffled.index + 1
-    shuffled['buy_for_index'].replace(len(data), 0, inplace=True)
+    shuffled['buy_for_index'].replace(len(df), 0, inplace=True)
 
     return (
         shuffled[["email_address", "name"]].merge(
@@ -17,4 +15,5 @@ def match_names(df):
         .sort_index()
     )
 
-df = match_names(data)
+if __name__ == "__main__":
+    print("This aint a script")
